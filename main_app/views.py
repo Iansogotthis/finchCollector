@@ -1,5 +1,5 @@
 from django.shortcuts import render
-
+from .models import Finch
 
 finches = [
         {'name': 'House Finch', 'color': 'Red', 'habitat': 'Urban areas', 'age': 0},
@@ -8,7 +8,6 @@ finches = [
     ]
 
 
-from django.shortcuts import render
 
 # Define the home view
 def home(request):
@@ -19,7 +18,27 @@ def about(request):
     return render(request, 'about.html')
 
 def finches_index(request):
-  # We pass data to a template very much like we did in Express!
-  return render(request, 'finches/index.html', {
-    'finches': finches
-  })
+    # Fetch all Finch objects from the database
+    finches = Finch.objects.all()
+    
+    # Create a list of dictionaries with required attributes including the database ID
+    finch_data = []
+    for finch in finches:
+        finch_data.append({
+            'id': finch.id,
+            'name': finch.name,
+            'color': finch.color,
+            'habitat': finch.habitat,
+            'age': finch.age
+        })
+    
+    return render(request, 'finches/index.html', {
+        'finches': finch_data
+    })
+def all_finches_view(request):
+    finches = Finch.objects.all()
+    return render(request, 'finches/all_finches.html', {'finch_data': finches})
+
+def finch_detail(request, finch_id):
+  finch = Finch.objects.get(id=finch_id)
+  return render(request, 'finches/finch_detail.html', { 'finch': finch })

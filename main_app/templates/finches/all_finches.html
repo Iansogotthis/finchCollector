@@ -2,16 +2,24 @@
 <html>
 <head>
     <title>All Finches</title>
+    <link rel="stylesheet" href="path/to/materialize/css/materialize.min.css">
+    <style>
+        h1 {
+            text-align: center;
+            color: #8B4513; /* Red brown color */
+        }
+    </style>
 </head>
 <body>
     {% extends 'base.html' %}
     {% block content %}
-    <h1>All Finches</h1>
-    <ul>
-        {% for finch in finch_data %}
-            <li>Name: {{ finch.name }}, Color: {{ finch.color }}, Habitat: {{ finch.habitat }}</li>
-        {% endfor %}
-    </ul>
+        <div class="container">
+            <h1 class="center-align">All Finches</h1>
+            <ul class="collection">
+                {% for finch in finch_data %}
+                    <li class="collection-item">Name: {{ finch.name }}, Color: {{ finch.color }}, Habitat: {{ finch.habitat }}, Age: {{ finch.age }}</li>
+                {% endfor %}
+            </ul>
     {% endblock %}
 </body>
 </html>

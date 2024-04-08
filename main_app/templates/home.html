@@ -1,14 +1,6 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Finch Data</title>
-</head>
-<body>
-    <h1>Finch Data</h1>
-    <ul>
-        {% for finch in finch_data %}
-            <li>Name: {{ finch.name }}, Color: {{ finch.color }}, Habitat: {{ finch.habitat }}</li>
-        {% endfor %}
-    </ul>
-</body>
-</html>
+{% extends 'base.html' %}
+
+{% block content %}
+  <h1>Welcome to Finch Collector</h1>
+  <p>This is the home page content.</p>
+{% endblock %}
