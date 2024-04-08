@@ -1,12 +1,12 @@
 from django.shortcuts import render
 
-def home(request):
-    finch_data = [
-        {'name': 'House Finch', 'color': 'Red', 'habitat': 'Urban areas'},
-        {'name': 'Goldfinch', 'color': 'Yellow', 'habitat': 'Open fields and meadows'},
+
+finches = [
+        {'name': 'House Finch', 'color': 'Red', 'habitat': 'Urban areas', 'age': 0},
+        {'name': 'Goldfinch', 'color': 'Yellow', 'habitat': 'Open fields and meadows', 'age': 2},
         # Add more finch data as needed
     ]
-    return render(request, 'templates/home.html', {'finch_data': finch_data})
+
 
 from django.shortcuts import render
 
@@ -17,3 +17,9 @@ def home(request):
 
 def about(request):
     return render(request, 'about.html')
+
+def finches_index(request):
+  # We pass data to a template very much like we did in Express!
+  return render(request, 'finches/index.html', {
+    'finches': finches
+  })
