@@ -3,7 +3,7 @@ from django.shortcuts import render
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 
 from .models import Finch
-
+from .forms import FeedingForm
 
 finches = [
         {'name': 'House Finch', 'color': 'Red', 'habitat': 'Urban areas', 'age': 0},
@@ -44,9 +44,10 @@ def all_finches_view(request):
     return render(request, 'finches/all_finches.html', {'finch_data': finches})
 
 def finch_detail(request, finch_id):
-  finch = Finch.objects.get(id=finch_id)
-  return render(request, 'finches/finch_detail.html', { 'finch': finch })
-
+    finch = Finch.objects.get(id=finch_id)
+    feeding_form = FeedingForm()
+    feeding_status = finch.get_feeding_status()
+    return render(request, 'finches/finch_detail.html', { 'finch': finch, 'feeding_form': feeding_form, 'feeding_status': feeding_status })
 class FinchCreate (CreateView):
   model = Finch
   fields = ['name', 'color', 'habitat', 'age']
